@@ -129,60 +129,47 @@ hasCJKLanguage = true
 ## 主题架构
 
 ```
-
-```
-
-themes/nova/
 ├── assets/
-│ ├── css/
-│ │ ├── core/ # PaperMod 核心 CSS（变量、重置、媒体查询）
-│ │ ├── common/ # PaperMod 通用样式
-│ │ ├── includes/ # Chroma 语法高亮
-│ │ └── extended/ # ⭐ 自定义 CSS（5 个文件）
-│ │ ├── sidebar.css # 三栏 Grid + 侧边栏 + TOC
-│ │ ├── custom.css # 首页布局、导航、页脚
-│ │ ├── search.css # 搜索页样式
-│ │ ├── tagcloud.css # 标签云样式
-│ │ └── social-icons.css
-│ └── js/
-│ ├── fastsearch.js # ⭐ 自定义 Fuse.js 搜索实现
-│ ├── fuse.basic.min.js # Fuse.js 库
-│ └── license.js
-├── config/\_default/ # 主题默认可合并配置
-├── exampleSite/ # ⭐ 示例站点（内容 + 配置 + 静态资源）
-│ ├── hugo.toml
-│ ├── content/
-│ └── static/
-├── i18n/ # 46 种语言翻译
+│   ├── css/
+│   │   ├── core/           # CSS 变量、重置、媒体查询
+│   │   ├── common/         # 通用样式
+│   │   ├── includes/       # Chroma 语法高亮
+│   │   └── extended/       # ⭐ 自定义 CSS（5 个文件）
+│   │       ├── sidebar.css
+│   │       ├── custom.css
+│   │       ├── search.css
+│   │       ├── tagcloud.css
+│   │       └── social-icons.css
+│   └── js/
+│       ├── fastsearch.js   # ⭐ 自定义搜索
+│       ├── fuse.basic.min.js
+│       └── license.js
+├── config/_default/        # 主题默认配置（自动合并）
+├── exampleSite/            # ⭐ 示例站点
+│   ├── hugo.toml
+│   ├── content/
+│   └── static/
+├── i18n/                   # 46 种语言
 ├── layouts/
-│ ├── partials/ # 模板部件（Hugo 0.146+）
-│ │ ├── sidebar_profile.html # ⭐ 侧边栏
-│ │ ├── right_sidebar.html # ⭐ 右侧小部件
-│ │ ├── toc.html # ⭐ TOC（始终展开 + 滚动高亮）
-│ │ ├── head.html # ⭐ <head>（CSS/JS 管线、SEO）
-│ │ ├── header.html # ⭐ 导航栏
-│ │ ├── footer.html # ⭐ 页脚（备案信息）
-│ │ ├── social_icons.html # ⭐ 社交图标
-│ │ └── ... # PaperMod 原始部件
-│ ├── single.html # ⭐ 文章详情（三栏）
-│ ├── list.html # ⭐ 首页 + 列表（分栏）
-│ ├── archives.html # ⭐ 时间线归档
-│ ├── search.html # ⭐ 搜索页
-│ ├── taxonomy.html # ⭐ 标签索引（A-Z + 拼音）
-│ ├── \_default/term.html # 标签详情页
-│ └── posts/list.html # 文章列表
+│   ├── partials/           # 模板部件
+│   ├── single.html         # ⭐ 文章详情
+│   ├── list.html           # ⭐ 首页 + 列表
+│   ├── archives.html       # ⭐ 归档
+│   ├── search.html         # ⭐ 搜索
+│   ├── taxonomy.html       # ⭐ 标签索引
+│   ├── posts/list.html     # ⭐ 文章列表
+│   └── ...
 ├── images/
-│ ├── screenshot.png # 主题截图
-│ └── tn.png # 缩略图
+│   ├── screenshot.png
+│   └── tn.png
 ├── archetypes/
-├── hugo.toml # 本仓库本地预览配置
-├── theme.toml # 主题元数据
-├── README.md # 主题文档（英文版）
-├── README-zh.md # 主题文档（中文版）
-├── LICENSE # MIT 许可证
-└── go.mod # Go 模块
-
-````
+├── hugo.toml
+├── theme.toml
+├── README.md
+├── README-zh.md
+├── LICENSE
+└── go.mod
+```
 
 > ⭐ = 与 PaperMod 存在差异或新增的文件
 
@@ -214,7 +201,7 @@ background: var(--bg); /* 页面背景 */
 background: var(--entry); /* 卡片背景 */
 border-color: var(--border); /* 边框 */
 background: var(--tertiary); /* 悬停背景 */
-````
+```
 
 ### 布局变量
 
