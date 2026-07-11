@@ -1,0 +1,28 @@
+{{- $scratch := newScratch }}
+{{- $lang := .Lang }}
+
+{{- if not (.Param "hideAuthor") -}}
+    {{- with (partial "author.html" .) }}
+        {{- $label := i18n "author_label" }}
+        {{- $scratch.Add "meta" (slice (printf "<span>%s%s</span>" $label .)) }}
+    {{- end }}
+{{- end }}
+
+{{- if not .Date.IsZero -}}
+    {{- $label := i18n "published_label" }}
+    {{- $scratch.Add "meta" (slice (printf "<span title='%s'>%s%s</span>" (.Date) $label (.Date | time.Format (default ":date_long" site.Params.DateFormat)))) }}
+{{- end }}
+
+{{- if (.Param "ShowReadingTime" | default true) -}}
+    {{- $readingLabel := i18n "read_label" }}
+    {{- $readingUnit := i18n "read_unit" }}
+    {{- $scratch.Add "meta" (slice (printf "<span>%s%d%s</span>" $readingLabel .ReadingTime $readingUnit)) }}
+{{- end }}
+
+{{- if (.Param "ShowWordCount") -}}
+    {{- $scratch.Add "meta" (slice (printf "<span>%s</span>" (i18n "words" .WordCount | default (printf "%d words" .WordCount)))) }}
+{{- end }}
+
+{{- with ($scratch.Get "meta") }}
+    {{- delimit . "&nbsp;·&nbsp;" | safeHTML -}}
+{{- end -}}

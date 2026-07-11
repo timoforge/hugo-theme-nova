@@ -1,0 +1,187 @@
+# Nova Theme — 本地预览配置
+# clone 后直接运行：hugo server -D
+# 无需 themes/nova 软链（本仓库即是主题本身）
+# 正式安装到站点时，使用 git submodule 方式引入
+
+baseURL = '/'
+defaultContentLanguage = 'zh'
+defaultContentLanguageInSubdir = false
+hasCJKLanguage = true
+contentDir = "exampleSite/content"
+staticDir = "exampleSite/static"
+
+# ============ 多语言配置 ============
+# 注意：根目录 hugo.toml 中必须写 [languages.zh]
+# 而 config/_default/languages.toml 中应写 [zh]（文件名已提供 languages 根键）
+
+[languages]
+  [languages.zh]
+    label = '中文'
+    languageName = '中文'
+    languageCode = 'zh-CN'
+    weight = 1
+    title = 'Nova'
+    [languages.zh.params]
+      description = '三栏 Grid 布局双语 Hugo 主题'
+      [languages.zh.params.profileMode]
+        enabled = true
+        title = 'Nova'
+        subtitle = ''
+        imageUrl = ''
+        imageTitle = 'Avatar'
+        imageWidth = 150
+        imageHeight = 150
+      [[languages.zh.params.socialIcons]]
+        name = 'github'
+        url = 'https://github.com/timoforge/hugo-theme-nova'
+        title = 'GitHub'
+      [[languages.zh.params.socialIcons]]
+        name = 'rss'
+        url = '/index.xml'
+        title = 'RSS'
+
+  [languages.en]
+    label = 'English'
+    languageName = 'English'
+    languageCode = 'en-US'
+    weight = 2
+    title = 'Nova'
+    [languages.en.params]
+      description = 'A three-column Grid bilingual Hugo theme'
+      [languages.en.params.profileMode]
+        enabled = true
+        title = 'Nova'
+        subtitle = ''
+        imageUrl = ''
+        imageTitle = 'Avatar'
+        imageWidth = 150
+        imageHeight = 150
+      [[languages.en.params.socialIcons]]
+        name = 'github'
+        url = 'https://github.com/timoforge/hugo-theme-nova'
+        title = 'GitHub'
+      [[languages.en.params.socialIcons]]
+        name = 'rss'
+        url = '/en/index.xml'
+        title = 'RSS'
+
+[[menu.main]]
+  identifier = "posts"
+  name = "文章"
+  url = "/posts/"
+  weight = 1
+
+[[menu.main]]
+  identifier = "archives"
+  name = "归档"
+  url = "/archives/"
+  weight = 2
+
+[[menu.main]]
+  identifier = "tags"
+  name = "标签"
+  url = "/tags/"
+  weight = 3
+
+[[menu.main]]
+  identifier = "search"
+  name = "搜索"
+  url = "/search/"
+  weight = 4
+
+[[menu.main]]
+  identifier = "posts_en"
+  name = "Posts"
+  url = "/posts/"
+  weight = 1
+  lang = "en"
+
+[[menu.main]]
+  identifier = "archives_en"
+  name = "Archives"
+  url = "/archives/"
+  weight = 2
+  lang = "en"
+
+[[menu.main]]
+  identifier = "tags_en"
+  name = "Tags"
+  url = "/tags/"
+  weight = 3
+  lang = "en"
+
+[[menu.main]]
+  identifier = "search_en"
+  name = "Search"
+  url = "/search/"
+  weight = 4
+  lang = "en"
+
+[params]
+  author = "TimoForge"
+  mainSections = ["posts"]
+  description = ''
+  keywords = ["blog", "hugo", "theme", "nova"]
+  env = "development"
+  defaultTheme = 'auto'
+  ShowReadingTime = true
+  ShowToc = true
+  ShowPostNavLinks = true
+  ShowBreadCrumbs = true
+  ShowCodeCopyButtons = true
+  ShowRssButtonInSectionTermList = true
+  displayFullLangName = true
+
+  [params.profileMode]
+    enabled = true
+    title = "Nova"
+    subtitle = ""
+    imageUrl = ""
+    imageTitle = "Avatar"
+    imageWidth = 150
+    imageHeight = 150
+
+  [[params.socialIcons]]
+    name = "github"
+    url = "https://github.com/timoforge/hugo-theme-nova"
+    title = "GitHub"
+
+  [params.label]
+    text = "Nova"
+
+  [params.cover]
+    hidden = false
+    hiddenInList = false
+    hiddenInSingle = false
+
+  [params.fuseOpts]
+    isCaseSensitive = false
+    shouldSort = true
+    location = 0
+    distance = 1000
+    threshold = 0.4
+    minMatchCharLength = 0
+    keys = ["title", "permalink", "summary", "content"]
+
+[outputs]
+  home = ['HTML', 'RSS', 'JSON']
+  page = ['HTML']
+  section = ['HTML', 'RSS']
+  taxonomy = ['HTML', 'RSS']
+  term = ['HTML', 'RSS']
+
+[permalinks]
+  posts = '/:slug/'
+
+[taxonomies]
+  tag = "tags"
+  category = "categories"
+
+[markup]
+  [markup.highlight]
+    noClasses = false
+    lineNos = true
+    codeFences = true
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true

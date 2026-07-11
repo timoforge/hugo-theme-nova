@@ -1,0 +1,117 @@
+# Nova Theme 默认参数
+# 此文件在主题安装到站点时自动生效，站点 config 可覆盖
+# 注意：config/_default/params.toml 的根键就是 params，不要再写 [params.xxx]
+
+# 站点基础信息
+author = "TimoForge"
+authorUrl = "https://github.com/timoforge"  # 页脚作者链接，可覆盖
+mainSections = ["posts"]
+description = ''  # 留空：meta description 用 i18n site_description，避免 dCL 串语言
+keywords = ["blog", "hugo", "theme", "nova"]
+env = "development"
+
+# 开箱默认中文主页（可从主题合并到站点）
+# Hugo 不会合并主题的 defaultContentLanguage（硬编码默认 en）。
+# 当站点未设置 defaultContentLanguage='zh' 时，默认语言首页 / 会跳到 /zh/。
+# 用户通过语言切换主动选英文后，会用 sessionStorage 记住偏好，不再被打回中文。
+# 站点已设置 defaultContentLanguage='zh' 时首页本身就是中文，此开关不生效。
+# 若希望默认英文首页：preferChineseHome = false
+preferChineseHome = true
+
+# 外观与主题
+defaultTheme = 'auto'
+disableThemeToggle = false
+displayFullLangName = true
+disableLangToggle = false
+
+# 文章显示
+# 注意：这些全局 params 只对 defaultContentLanguage 生效。
+# 非默认语言不会继承，必须在 languages.toml 的 [zh.params]/[en.params] 中同步声明。
+ShowReadingTime = true
+ShowWordCount = false
+ShowPostNavLinks = true
+ShowBreadCrumbs = true
+ShowCodeCopyButtons = true
+ShowToc = true
+ShowShareButtons = false
+ShowPageNums = true
+ShowFullTextinRSS = false
+ShowRssButtonInSectionTermList = true
+UseHugoToc = true
+
+# 站点运行时间
+siteStartDate = '2026-01-01T00:00:00+08:00'
+
+# 功能开关
+disableScrollToTop = false
+disableSpecial1stPost = false
+hideFooter = false
+hideMeta = false
+hideSummary = false
+
+# 全局 profileMode 兜底（仅 defaultContentLanguage 使用全局 params）
+# 必须用英文：开箱仅 theme=nova 时 dCL 固定为 en。中文文案放 languages.toml [zh.params]
+# 语言级配置：[zh.params.profileMode] / [en.params.profileMode]
+[profileMode]
+  enabled = true
+  title = "Nova"
+  subtitle = ""  # 留空：用 i18n profile_subtitle，避免 dCL=en/zh 时副标题串语言
+  imageUrl = ""
+  imageTitle = "Avatar"
+  imageWidth = 150
+  imageHeight = 150
+
+# 全局 socialIcons 兜底
+[[socialIcons]]
+  name = "github"
+  url = "https://github.com/timoforge/hugo-theme-nova"
+  title = "GitHub"
+[[socialIcons]]
+  name = "rss"
+  url = "/index.xml"
+  title = "RSS"
+
+# 站点品牌标识
+[label]
+  text = "Nova"
+  icon = ""
+  iconSVG = ""
+  iconHeight = 30
+
+# 站点资源路径
+[assets]
+  favicon = ""
+  favicon16x16 = ""
+  favicon32x32 = ""
+  apple_touch_icon = ""
+  safari_pinned_tab = ""
+  disableFingerprinting = false
+
+# 封面图设置
+[cover]
+  linkFullImages = false
+  responsiveImages = true
+  hidden = false
+  hiddenInList = false
+  hiddenInSingle = false
+
+# 编辑文章链接
+[editPost]
+  URL = ""
+  Text = ""
+  appendFilePath = false
+
+# Fuse.js 全文搜索参数
+[fuseOpts]
+  isCaseSensitive = false
+  shouldSort = true
+  location = 0
+  distance = 1000
+  threshold = 0.4
+  minMatchCharLength = 0
+  keys = ["title", "permalink", "summary", "content"]
+
+# Schema.org 结构化数据
+[schema]
+  publisherType = "Organization"
+  sameAs = []

@@ -1,0 +1,87 @@
+# Nova Theme 默认多语言配置
+# 重要：config/_default/languages.toml 的根键就是 languages
+# 所以这里写 [zh] / [en]，不要再写 [languages] 或 [languages.zh]
+# 否则会变成 languages.languages.zh，并产生幽灵语言 "languages"
+
+[zh]
+  label = "中文"
+  languageName = "中文"
+  languageCode = "zh-CN"
+  weight = 1
+  title = "Nova"
+  [zh.params]
+    author = "TimoForge"
+    description = "三栏 Grid 布局双语 Hugo 主题"
+    # 语言级 params 不会继承全局 params.toml：非默认语言必须显式写这些开关
+    # 注意：default language 读的是全局 params.toml，不是本段（开箱 dCL=en → 全局须为英文）
+    ShowToc = true
+    UseHugoToc = true
+    ShowReadingTime = true
+    ShowPostNavLinks = true
+    ShowBreadCrumbs = true
+    ShowCodeCopyButtons = true
+    ShowShareButtons = false
+    ShowWordCount = false
+    ShowPageNums = true
+    # 右侧栏运行时长：非默认语言读不到全局 siteStartDate
+    siteStartDate = "2026-01-01T00:00:00+08:00"
+    # 顶栏品牌：非默认语言读不到全局 label，须显式声明
+    [zh.params.label]
+      text = "Nova"
+    [zh.params.profileMode]
+      enabled = true
+      title = "Nova"
+      subtitle = ""  # 留空：用 i18n profile_subtitle
+      imageUrl = ""  # 留空：显示 SVG 占位头像
+      imageTitle = "Avatar"
+      imageWidth = 150
+      imageHeight = 150
+    [[zh.params.socialIcons]]
+      name = "github"
+      url = "https://github.com/timoforge/hugo-theme-nova"
+      title = "GitHub"
+    [[zh.params.socialIcons]]
+      name = "rss"
+      url = "/index.xml"
+      title = "RSS"
+
+[en]
+  label = "English"
+  languageName = "English"
+  languageCode = "en-US"
+  weight = 2
+  title = "Nova"
+  [en.params]
+    author = "TimoForge"
+    description = "A three-column Grid bilingual Hugo theme"
+    # Language-level params do NOT inherit global params.toml — non-default languages need these flags explicitly
+    ShowToc = true
+    UseHugoToc = true
+    ShowReadingTime = true
+    ShowPostNavLinks = true
+    ShowBreadCrumbs = true
+    ShowCodeCopyButtons = true
+    ShowShareButtons = false
+    ShowWordCount = false
+    ShowPageNums = true
+    # Right sidebar runtime: non-default language cannot fall back to global siteStartDate
+    siteStartDate = "2026-01-01T00:00:00+08:00"
+    # Header brand: non-default language cannot fall back to global label
+    [en.params.label]
+      text = "Nova"
+    [en.params.profileMode]
+      enabled = true
+      title = "Nova"
+      subtitle = ""  # leave empty: use i18n profile_subtitle
+      imageUrl = ""  # leave empty: show SVG avatar placeholder
+      imageTitle = "Avatar"
+      imageWidth = 150
+      imageHeight = 150
+    [[en.params.socialIcons]]
+      name = "github"
+      url = "https://github.com/timoforge/hugo-theme-nova"
+      title = "GitHub"
+    [[en.params.socialIcons]]
+      name = "rss"
+      url = "/en/index.xml"
+      title = "RSS"

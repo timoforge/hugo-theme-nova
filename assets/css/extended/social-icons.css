@@ -1,0 +1,15 @@
+.social-icons span.social-icon,
+.social-icons a {
+    display: inline-flex;
+    padding: 10px;
+}
+
+.social-icons span.social-icon svg,
+.social-icons a svg {
+    height: 26px;
+    width: 26px;
+}
+
+.social-icons span.social-icon {
+    cursor: default;
+}

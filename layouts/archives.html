@@ -1,0 +1,68 @@
+{{- define "main" }}
+<div class="page-with-sidebar">
+  <header class="page-header">
+    <h1>{{ .Title }}</h1>
+    {{- if .Description }}
+    <div class="post-description">{{ .Description }}</div>
+    {{- end }}
+  </header>
+  {{- partial "sidebar_profile.html" . -}}
+  <div class="content-right">
+    {{- $mainSections := site.Params.mainSections | default (slice "posts") }}{{- $pages := where site.RegularPages "Type" "in" $mainSections }}
+    {{- if site.Params.ShowAllPagesInArchive }}{{ $pages = site.RegularPages }}{{ end }}
+    {{- $total := len $pages }}
+    <div class="timeline-archives">
+      <div class="timeline-header">
+        <span class="timeline-total">{{ printf (i18n "archives_total" | default "%d posts") $total }}</span>
+        <span class="timeline-subtitle">{{ i18n "archives_timeline" | default "Arranged by timeline" }}</span>
+      </div>
+      <div class="timeline-body">
+        {{- range $pages.GroupByPublishDate "2006" }}
+        {{- if ne .Key "0001" }}
+        {{- $year := replace .Key "0001" "" }}
+        {{- $yearCount := len .Pages }}
+        <!-- Year marker -->
+        <div class="tl-year" id="{{ $year }}">
+          <div class="tl-year-line"></div>
+          <div class="tl-year-label">
+            <span class="tl-year-text">{{ $year }}</span>
+            <span class="tl-year-count">{{ printf (i18n "archives_year_count" | default "%d posts") $yearCount }}</span>
+          </div>
+          <div class="tl-year-line"></div>
+        </div>
+        <!-- Posts -->
+        {{- range .Pages }}{{ if eq .Kind "page" }}
+        <article class="tl-entry">
+          <div class="tl-dot" aria-hidden="true"></div>
+          <time class="tl-date" datetime="{{ .PublishDate.Format "2006-01-02" }}">
+            <span class="tl-date-month">{{ .PublishDate.Format "01" }}</span>
+            <span class="tl-date-sep">·</span>
+            <span class="tl-date-day">{{ .PublishDate.Format "02" }}</span>
+          </time>
+          <div class="tl-content">
+            <h3 class="tl-title">
+              <a href="{{ .RelPermalink }}">
+                {{- .Title | markdownify }}
+                {{- if .Draft }}
+                <span class="tl-draft-badge">Draft</span>
+                {{- end }}
+              </a>
+            </h3>
+            {{- with .Params.tags }}
+            <div class="tl-tags">
+              {{- range . }}
+              <span class="tl-tag">{{ . }}</span>
+              {{- end }}
+            </div>
+            {{- end }}
+          </div>
+        </article>
+        {{- end }}{{ end }}
+        {{- end }}{{ end }}
+      </div>
+    </div>
+  </div>
+
+  {{- partial "right_sidebar.html" . -}}
+</div>
+{{- end }}{{/* end main */}}

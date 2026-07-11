@@ -1,0 +1,177 @@
+{{- define "main" }}
+
+<div class="page-with-sidebar">
+  {{- if not .IsHome | and .Title }}
+  <header class="page-header">
+    {{ partial "breadcrumbs.html" . }}
+    <h1 class="post-title entry-hint-parent">
+      {{ .Title }} {{- if .Draft }}
+      <span class="entry-hint" title="Draft">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          height="35"
+          viewBox="0 -960 960 960"
+          fill="currentColor"
+        >
+          <path
+            d="M160-410v-60h300v60H160Zm0-165v-60h470v60H160Zm0-165v-60h470v60H160Zm360 580v-123l221-220q9-9 20-13t22-4q12 0 23 4.5t20 13.5l37 37q9 9 13 20t4 22q0 11-4.5 22.5T862.09-380L643-160H520Zm300-263-37-37 37 37ZM580-220h38l121-122-18-19-19-18-122 121v38Zm141-141-19-18 37 37-18-19Z"
+          />
+        </svg>
+      </span>
+      {{- end }}
+    </h1>
+    {{- if .Description }}
+    <div class="post-description">{{ .Description }}</div>
+    {{- end }} {{- if not (.Param "hideMeta") }}
+    <div class="post-meta">
+      {{- partial "post_meta.html" . -}} {{- partial "translation_list.html" .
+      -}} {{- partial "edit_post.html" . -}} {{- partial "post_canonical.html" .
+      -}}
+    </div>
+    {{- end }}
+  </header>
+  {{- end }} {{- partial "sidebar_profile.html" . -}}
+
+  <div class="content-right">
+    <article class="post-single">
+      {{- $isHidden := (.Param "cover.hiddenInSingle") | default (.Param
+      "cover.hidden") | default false }} {{- partial "cover.html" (dict "cxt" .
+      "IsSingle" true "isHidden" $isHidden) }} {{- $tags :=
+      .Language.Params.Taxonomies.tag | default "tags" }} {{- with $.GetTerms
+      $tags }}
+      <ul class="post-tags">
+        {{- range . }}
+        <li><a href="{{ .Permalink }}">{{ .LinkTitle }}</a></li>
+        {{- end }}
+      </ul>
+      {{- end }} {{- if .Content }}
+      <div class="post-content md-content">
+        {{- if not (.Param "disableAnchoredHeadings") }} {{- partial
+        "anchored_headings.html" .Content -}} {{- else }}{{ .Content }}{{ end }}
+      </div>
+      {{- end }} {{- partial "extend_post_content.html" . }}
+
+      <footer class="post-footer">
+        {{- if (.Param "ShowPostNavLinks" | default true) }} {{- partial "post_nav_links.html"
+        . }} {{- end }} {{- if (and site.Params.ShowShareButtons (ne
+        .Params.disableShare true)) }} {{- partial "share_icons.html" . -}} {{-
+        end }}
+      </footer>
+
+      {{- if (.Param "comments") }} {{- partial "comments.html" . }} {{- end }}
+    </article>
+  </div>
+  {{- /* 非默认语言的 languages.*.params 不继承全局 ShowToc；默认开启 */ -}}
+  {{- if (.Param "ShowToc" | default true) }}
+  <aside class="toc-right">{{- partial "toc.html" . }}</aside>
+  {{- end }}
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    var tocRight = document.querySelector(".toc-right");
+    if (!tocRight) return;
+
+    var tocLinks = tocRight.querySelectorAll('a[href^="#"]');
+    var content = document.querySelector(".post-content");
+    if (!content || tocLinks.length === 0) return;
+
+    // Collect all heading IDs referenced by TOC
+    var targetIds = [];
+    tocLinks.forEach(function (link) {
+      var href = link.getAttribute("href");
+      if (href && href.startsWith("#")) {
+        targetIds.push(href.substring(1));
+      }
+    });
+
+    // Find heading elements in content
+    var headings = [];
+    targetIds.forEach(function (id) {
+      var el = document.getElementById(id);
+      if (el) headings.push(el);
+    });
+
+    if (headings.length === 0) return;
+
+    function removeAllActive() {
+      tocLinks.forEach(function (l) {
+        l.classList.remove("active");
+      });
+    }
+
+    function getActiveIndex() {
+      var minDist = Infinity;
+      var activeIdx = 0;
+      var headerHeight = 80; // sticky header offset
+
+      headings.forEach(function (h, idx) {
+        var rect = h.getBoundingClientRect();
+        var dist = Math.abs(rect.top - headerHeight);
+        // If heading is above viewport, give large distance
+        // If heading is below viewport, also large distance
+        if (rect.bottom < 0) {
+          dist = Infinity;
+        }
+        if (rect.top > window.innerHeight) {
+          // This heading hasn't been scrolled to yet - give it a large distance
+          // but less than headings way above
+        }
+        if (dist < minDist) {
+          minDist = dist;
+          activeIdx = idx;
+        }
+      });
+
+      // Special case: if user is at the very top, first heading should be active
+      // if user is scrolled past last heading, last heading should be active
+      // Simple approach: find the last heading whose top is <= headerHeight + small threshold
+      var activeFound = false;
+      for (var i = headings.length - 1; i >= 0; i--) {
+        var top = headings[i].getBoundingClientRect().top;
+        if (top <= headerHeight + 10) {
+          return i;
+        }
+      }
+
+      return 0;
+    }
+
+    function updateActive() {
+      var idx = getActiveIndex();
+      removeAllActive();
+      if (tocLinks[idx]) {
+        tocLinks[idx].classList.add("active");
+        // Scroll TOC container so active link stays visible
+        var tocInner = document.querySelector(".toc-right .toc-inner");
+        if (tocInner) {
+          var linkTop = tocLinks[idx].offsetTop - tocInner.offsetTop;
+          var linkBottom = linkTop + tocLinks[idx].offsetHeight;
+          var scrollTop = tocInner.scrollTop;
+          var scrollBottom = scrollTop + tocInner.clientHeight;
+          if (linkTop < scrollTop) {
+            tocInner.scrollTop = linkTop - 8;
+          } else if (linkBottom > scrollBottom) {
+            tocInner.scrollTop = linkBottom - tocInner.clientHeight + 8;
+          }
+        }
+      }
+    }
+
+    // Throttled scroll listener
+    var ticking = false;
+    window.addEventListener("scroll", function () {
+      if (!ticking) {
+        window.requestAnimationFrame(function () {
+          updateActive();
+          ticking = false;
+        });
+        ticking = true;
+      }
+    });
+
+    // Initial update
+    updateActive();
+  });
+</script>
+{{- end }}{{/* end main */ -}}

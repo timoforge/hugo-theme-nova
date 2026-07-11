@@ -1,0 +1,84 @@
+# Nova Theme 默认站点配置
+# 注意：defaultContentLanguage 等 root 配置不会从主题合并到站点（Hugo 限制）！
+# 开箱默认中文由 params.preferChineseHome 实现（默认语言首页重定向到 /zh/；语言切换用 sessionStorage 记住偏好）。
+# 仍建议站点显式设置 defaultContentLanguage = "zh"（见 exampleSite/hugo.toml），
+# 这样中文会在根路径 / 而非 /zh/，且无需跳转。
+# 本文件只保留可合并的配置项
+
+[outputs]
+  home = ["HTML", "RSS", "JSON"]
+  page = ["HTML"]
+  section = ["HTML", "RSS"]
+  taxonomy = ["HTML", "RSS"]
+  term = ["HTML", "RSS"]
+
+[permalinks]
+  posts = "/:slug/"
+
+[taxonomies]
+  tag = "tags"
+  category = "categories"
+
+[markup]
+  [markup.highlight]
+    noClasses = false
+    lineNos = true
+    codeFences = true
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+
+# ============ 默认导航菜单 ============
+# 使用语言相对路径，relLangURL 会自动处理语言前缀
+
+[[menu.main]]
+  identifier = "posts"
+  name = "文章"
+  url = "/posts/"
+  weight = 1
+
+[[menu.main]]
+  identifier = "archives"
+  name = "归档"
+  url = "/archives/"
+  weight = 2
+
+[[menu.main]]
+  identifier = "tags"
+  name = "标签"
+  url = "/tags/"
+  weight = 3
+
+[[menu.main]]
+  identifier = "search"
+  name = "搜索"
+  url = "/search/"
+  weight = 4
+
+[[menu.main]]
+  identifier = "posts_en"
+  name = "Posts"
+  url = "/posts/"
+  weight = 1
+  lang = "en"
+
+[[menu.main]]
+  identifier = "archives_en"
+  name = "Archives"
+  url = "/archives/"
+  weight = 2
+  lang = "en"
+
+[[menu.main]]
+  identifier = "tags_en"
+  name = "Tags"
+  url = "/tags/"
+  weight = 3
+  lang = "en"
+
+[[menu.main]]
+  identifier = "search_en"
+  name = "Search"
+  url = "/search/"
+  weight = 4
+  lang = "en"

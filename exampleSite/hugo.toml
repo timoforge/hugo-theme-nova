@@ -1,0 +1,33 @@
+# Nova Theme exampleSite 配置
+# 复制本文件到你的站点根目录，或参考其中的关键设置
+#
+# 最小开箱：仅 theme = 'nova' 即可（首页会跳转到 /zh/ 中文站）。
+# 推荐如下完整设置，让中文直接作为根路径 /，无需跳转。
+#
+# 本地预览本 exampleSite（在主题仓库内）：
+#   hugo server -D --source exampleSite --themesDir ../
+# 或在仓库根目录（已有 content/static/themes 软链）直接：
+#   hugo server -D
+
+baseURL = 'https://example.org/'
+theme = 'nova'
+
+# 推荐：由站点声明默认语言（Hugo 不会从主题合并 root 级 defaultContentLanguage）
+defaultContentLanguage = 'zh'
+defaultContentLanguageInSubdir = false
+hasCJKLanguage = true
+
+# 站点标题（Hugo 不会从主题合并默认语言 title；顶栏也可走 params.label.text）
+title = 'Nova'
+
+# 其余 params / languages / menus 已由主题 config/_default/ 提供
+# 如需覆盖，取消下面注释并修改
+# 注意：default language 使用 [params]；非默认语言用 [languages.xx.params]
+# 未设置 profileMode.subtitle 时，主题用 i18n profile_subtitle（中/英各一）
+
+# [params]
+#   author = "Your Name"
+#   [params.profileMode]
+#     title = "Your Site"
+#     subtitle = "Your subtitle"
+#     imageUrl = "/images/avatar.png"

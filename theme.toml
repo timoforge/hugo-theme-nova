@@ -1,0 +1,67 @@
+# theme.toml for Nova Theme
+
+name = "nova"
+license = "MIT"
+licenselink = "https://github.com/timoforge/hugo-theme-nova/blob/main/LICENSE"
+description = "Nova — a three-column Grid bilingual Hugo theme"
+homepage = "https://github.com/timoforge/hugo-theme-nova"
+tags = [
+  "responsive",
+  "blog",
+  "clean",
+  "minimal",
+  "light",
+  "dark",
+  "multilingual",
+  "search",
+  "seo",
+  "three-column",
+  "personal",
+  "bilingual",
+  "chinese"
+]
+features = [
+  "responsive",
+  "three-column-grid",
+  "blog",
+  "cover-image",
+  "table-of-contents",
+  "opengraph",
+  "twitter-cards",
+  "favicon",
+  "archive",
+  "share-icons",
+  "cover",
+  "multilingual",
+  "social-icons",
+  "minified-assets",
+  "theme-toggle",
+  "scroll-to-top",
+  "search",
+  "breadcrumbs",
+  "reading-time",
+  "word-count",
+  "code-copy",
+  "comments",
+  "edit-post",
+  "canonical-link",
+  "profile-mode",
+  "related-posts",
+  "rss",
+  "multiple-authors",
+  "post-nav-links",
+  "timeline-archives",
+  "tag-index",
+  "sidebar",
+  "right-sidebar-widgets",
+  "time-greeting",
+  "site-runtime",
+  "daily-quote"
+]
+min_version = "0.146.0"
+
+[author]
+  name = "TimoForge"
+  homepage = "https://github.com/timoforge"
+
+

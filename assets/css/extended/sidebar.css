@@ -1,0 +1,1441 @@
+/* ============================================
+   Layout Variables
+   ============================================ */
+:root {
+  --sidebar-w: 250px;
+  --toc-w: 240px;
+  --top-offset: 6rem;
+  --header-row-h: auto;
+  --gap-col: 2rem;
+  --avatar-size: 130px;
+  --avatar-size-mobile: 100px;
+  --sidebar-radius: 14px;
+  --content-radius: 10px;
+}
+
+/* ============================================
+   Page Container — keep existing width
+   ============================================ */
+.main:has(.page-with-sidebar) {
+  max-width: calc(
+    var(--nav-width) + var(--gap) * 2 + var(--toc-w) * 2 + var(--gap-col) * 2
+  );
+  padding-top: 1rem;
+}
+
+/* ============================================
+   Grid layout — 3 columns, sidebar more compact
+   ============================================ */
+.page-with-sidebar {
+  display: grid;
+  grid-template-columns: var(--sidebar-w) minmax(0, 1fr) var(--toc-w);
+  column-gap: var(--gap-col);
+  grid-template-areas:
+    "sidebar header toc"
+    "sidebar content toc";
+  grid-template-rows: auto 1fr;
+  align-items: start;
+}
+
+/* ============================================
+   Left Sidebar — clean elevated card
+   ============================================ */
+.sidebar-profile {
+  grid-area: sidebar;
+  align-self: start;
+  position: sticky;
+  top: var(--top-offset);
+}
+
+.sidebar-profile-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 1.5rem 1.25rem;
+  background: var(--entry);
+  border: 1px solid var(--border);
+  border-radius: var(--sidebar-radius);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+  transition: box-shadow 0.25s ease;
+}
+
+.sidebar-profile-inner:hover {
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+}
+
+.sidebar-avatar-link {
+  display: block;
+  text-decoration: none;
+  line-height: 0;
+  margin-bottom: 0.25rem;
+}
+
+.sidebar-profile-inner img,
+.sidebar-avatar-placeholder {
+  width: var(--avatar-size);
+  height: var(--avatar-size);
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--border);
+  transition: border-color 0.25s ease, transform 0.3s ease;
+}
+
+.sidebar-avatar-placeholder {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--tertiary);
+}
+
+.sidebar-avatar-placeholder svg {
+  width: 55%;
+  height: 55%;
+  color: var(--secondary);
+  opacity: 0.6;
+}
+
+.sidebar-profile-inner:hover .sidebar-avatar-placeholder {
+  border-color: var(--primary);
+  transform: scale(1.03);
+}
+
+.sidebar-profile-inner:hover img {
+  border-color: var(--primary);
+  transform: scale(1.03);
+}
+
+.sidebar-title {
+  font-size: clamp(1rem, 2vw, 1.2rem);
+  font-weight: 700;
+  margin: 0.5rem 0 0.25rem;
+  color: var(--primary);
+  letter-spacing: -0.01em;
+}
+
+.sidebar-subtitle {
+  font-size: clamp(0.78rem, 1.5vw, 0.85rem);
+  color: var(--secondary);
+  margin: 0 0 1.25rem;
+  line-height: 1.5;
+}
+
+/* Sidebar divider */
+.sidebar-divider {
+  width: 2rem;
+  height: 3px;
+  border-radius: 2px;
+  background: var(--tertiary);
+  margin: 0 0 1.25rem;
+  opacity: 0.5;
+}
+
+/* ============================================
+   Sidebar navigation — minimal buttons
+   ============================================ */
+.sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  width: 100%;
+}
+
+.sidebar-button {
+  display: block;
+  padding: 0.55rem 0.8rem;
+  color: var(--secondary);
+  background: transparent;
+  border: none;
+  border-radius: 8px;
+  text-decoration: none;
+  font-size: clamp(0.82rem, 1.6vw, 0.9rem);
+  font-weight: 500;
+  text-align: center;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.sidebar-button:hover {
+  color: var(--primary);
+  background: var(--tertiary);
+}
+
+.sidebar-button.active {
+  color: var(--theme);
+  background: var(--primary);
+  font-weight: 600;
+}
+
+.sidebar-button-inner {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+}
+
+/* ============================================
+   Social icons in sidebar
+   ============================================ */
+.sidebar-profile-inner .social-icons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.15rem;
+  margin: 0.25rem 0 0.5rem;
+}
+
+.social-icons-row {
+  display: flex;
+  justify-content: center;
+  gap: 0.15rem;
+}
+
+.sidebar-profile-inner .social-icons a {
+  display: inline-flex;
+  padding: 6px;
+  border-radius: 8px;
+  transition: background 0.2s ease;
+  cursor: default;
+  color: var(--primary);
+  text-decoration: none;
+}
+
+.sidebar-profile-inner .social-icons a[href] {
+  cursor: pointer;
+  color: var(--secondary);
+}
+
+.sidebar-profile-inner .social-icons a:hover {
+  background: var(--tertiary);
+  color: var(--primary);
+}
+
+.sidebar-profile-inner .social-icons svg {
+  height: 20px;
+  width: 20px;
+}
+
+/* ============================================
+   Sidebar sections (tags, latest post)
+   ============================================ */
+.sidebar-section {
+  width: 100%;
+  margin-top: 0.75rem;
+  padding-top: 0.65rem;
+  border-top: 1px solid var(--border);
+}
+
+.sidebar-section-title {
+  display: block;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.5rem;
+}
+
+/* Tags cloud */
+.sidebar-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+}
+
+.sidebar-tag {
+  display: inline-block;
+  padding: 0.2rem 0.5rem;
+  font-size: 0.72rem;
+  font-weight: 500;
+  color: var(--secondary);
+  background: var(--theme);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  text-decoration: none;
+  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.sidebar-tag:hover {
+  color: var(--primary);
+  background: var(--tertiary);
+  border-color: var(--secondary);
+}
+
+.sidebar-tag-empty {
+  font-size: 0.75rem;
+  color: var(--secondary);
+  opacity: 0.6;
+}
+
+/* Latest post */
+.sidebar-latest-post {
+  display: block;
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--primary);
+  text-decoration: none;
+  line-height: 1.4;
+  padding: 0.3rem 0.4rem;
+  border-radius: 6px;
+  transition: background 0.2s ease;
+  word-break: break-word;
+}
+
+.sidebar-latest-post:hover {
+  background: var(--tertiary);
+}
+
+/* ============================================
+   Sidebar stats (post count, tags count)
+   ============================================ */
+.sidebar-stats {
+  margin-top: 0.75rem;
+  padding-top: 0.65rem;
+  width: 100%;
+  text-align: center;
+  border-top: 1px solid var(--border);
+  display: flex;
+  justify-content: center;
+  gap: 0.3rem;
+}
+
+.sidebar-stat-item {
+  font-size: 0.75rem;
+  color: var(--secondary);
+  font-weight: 500;
+}
+
+.sidebar-stat-divider {
+  font-size: 0.75rem;
+  color: var(--border);
+}
+
+/* ============================================
+   Page header — clean minimal
+   ============================================ */
+.page-with-sidebar > .page-header {
+  grid-area: header;
+  margin: 0.5rem 0 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.page-with-sidebar > .page-header h1 {
+  margin: 0;
+  font-size: 1.75rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.3;
+}
+
+.page-with-sidebar > .page-header .post-description {
+  margin-top: 0.4rem;
+  font-size: 0.92rem;
+  color: var(--secondary);
+}
+
+/* ============================================
+   Content area — clean cards
+   ============================================ */
+.content-right {
+  grid-area: content;
+  min-width: 0;
+}
+
+.content-right .post-content {
+  margin-top: 0;
+}
+
+/* ---- Post entries ---- */
+.post-entry {
+  padding: 1.1rem 1.25rem;
+  margin-bottom: 0.75rem;
+  background: var(--entry);
+  border: 1px solid var(--border);
+  border-radius: var(--content-radius);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.post-entry:hover {
+  border-color: var(--secondary);
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.04);
+}
+
+.post-entry .entry-header h2 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: 0 0 0.35rem;
+  line-height: 1.4;
+}
+
+.post-entry .entry-content p {
+  font-size: 0.9rem;
+  color: var(--secondary);
+  line-height: 1.6;
+  margin: 0;
+}
+
+.post-entry .entry-footer {
+  margin-top: 0.5rem;
+  font-size: 0.82rem;
+  color: var(--secondary);
+}
+
+/* ============================================
+   Timeline Archives — elegant & minimal
+   ============================================ */
+.timeline-archives {
+  --tl-line-color: var(--border);
+  --tl-dot-size: 10px;
+  --tl-line-width: 2px;
+  --tl-entry-gap: 1.6rem;
+}
+
+/* --- Header --- */
+.timeline-header {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+  margin-bottom: 2.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.timeline-total {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--primary);
+  letter-spacing: 0.02em;
+}
+
+.timeline-subtitle {
+  font-size: 0.82rem;
+  color: var(--secondary);
+  font-weight: 400;
+}
+
+/* --- Timeline body --- */
+.timeline-body {
+  position: relative;
+  padding-left: 2.5rem;
+}
+
+/* Vertical spine line */
+.timeline-body::before {
+  content: "";
+  position: absolute;
+  left: 8px;
+  top: 0;
+  bottom: 0;
+  width: var(--tl-line-width);
+  background: var(--tl-line-color);
+  border-radius: 1px;
+}
+
+/* --- Year marker --- */
+.tl-year {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin: 2.5rem 0 1.5rem;
+  position: relative;
+}
+
+.tl-year:first-of-type {
+  margin-top: 0;
+}
+
+.tl-year-line {
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+.tl-year-line:first-child {
+  flex: 0 0 2.5rem;
+  margin-left: -2.5rem;
+}
+
+.tl-year-label {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  flex-shrink: 0;
+}
+
+.tl-year-text {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--primary);
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+
+.tl-year-count {
+  font-size: 0.78rem;
+  color: var(--secondary);
+  font-weight: 400;
+}
+
+/* --- Entry --- */
+.tl-entry {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 0.3rem 0 var(--tl-entry-gap);
+  transition: opacity 0.2s ease;
+}
+
+/* Dot on the timeline */
+.tl-dot {
+  position: absolute;
+  left: calc(-2.5rem + 8px - var(--tl-dot-size) / 2 + 1px);
+  top: 0.6rem;
+  width: var(--tl-dot-size);
+  height: var(--tl-dot-size);
+  border-radius: 50%;
+  background: var(--secondary);
+  border: 2px solid var(--bg);
+  flex-shrink: 0;
+  transition: background 0.25s ease, transform 0.25s ease;
+  z-index: 1;
+}
+
+.tl-entry:hover .tl-dot {
+  background: var(--primary);
+  transform: scale(1.25);
+}
+
+/* Date */
+.tl-date {
+  flex-shrink: 0;
+  width: 3.2rem;
+  text-align: right;
+  font-size: 0.82rem;
+  color: var(--secondary);
+  font-variant-numeric: tabular-nums;
+  padding-top: 0.55rem;
+  line-height: 1.3;
+  letter-spacing: 0.02em;
+}
+
+.tl-date-month,
+.tl-date-day {
+  font-weight: 500;
+}
+
+.tl-date-sep {
+  margin: 0 0.1rem;
+  opacity: 0.4;
+}
+
+/* Content */
+.tl-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.tl-title {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1.5;
+}
+
+.tl-title a {
+  color: var(--primary);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.tl-title a:hover {
+  color: var(--secondary);
+}
+
+.tl-draft-badge {
+  display: inline-block;
+  font-size: 0.65rem;
+  font-weight: 600;
+  color: #d97706;
+  background: #fef3c7;
+  padding: 0.08rem 0.4rem;
+  border-radius: 3px;
+  margin-left: 0.4rem;
+  vertical-align: middle;
+  letter-spacing: 0.02em;
+}
+
+/* Tags */
+.tl-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin-top: 0.25rem;
+}
+
+.tl-tag {
+  font-size: 0.7rem;
+  color: var(--secondary);
+  background: var(--entry);
+  border: 1px solid var(--border);
+  padding: 0.05rem 0.45rem;
+  border-radius: 4px;
+  line-height: 1.4;
+  transition: border-color 0.2s ease;
+}
+
+.tl-tag:hover {
+  border-color: var(--secondary);
+}
+
+/* --- Mobile: compact timeline --- */
+@media (max-width: 1024px) {
+  .timeline-body {
+    padding-left: 2rem;
+  }
+
+  .timeline-body::before {
+    left: 6px;
+  }
+
+  .tl-dot {
+    left: calc(-2rem + 6px - var(--tl-dot-size) / 2 + 1px);
+    width: 8px;
+    height: 8px;
+  }
+
+  .tl-date {
+    width: 2.6rem;
+    font-size: 0.75rem;
+    padding-top: 0.4rem;
+  }
+
+  .tl-title {
+    font-size: 0.9rem;
+  }
+
+  .tl-entry {
+    gap: 0.7rem;
+    padding-bottom: 1.2rem;
+  }
+
+  .tl-year {
+    margin: 1.8rem 0 1rem;
+  }
+
+  .tl-year-text {
+    font-size: 1.1rem;
+  }
+
+  .tl-year-line:first-child {
+    flex: 0 0 2rem;
+    margin-left: -2rem;
+  }
+
+  .timeline-header {
+    margin-bottom: 1.5rem;
+  }
+}
+
+/* ---- Tags cloud ---- */
+.terms-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.terms-tags li {
+  margin: 0;
+}
+
+.terms-tags li a {
+  display: inline-block;
+  padding: 0.35rem 0.85rem;
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: var(--primary);
+  background: var(--entry);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  text-decoration: none;
+  transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+
+.terms-tags li a:hover {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: var(--theme);
+}
+
+.terms-tags li a sup {
+  font-size: 0.72rem;
+  font-weight: 400;
+  color: var(--secondary);
+  margin-left: 0.2rem;
+  transition: color 0.2s ease;
+}
+
+.terms-tags li a:hover sup {
+  color: var(--theme);
+  opacity: 0.7;
+}
+
+/* ---- Search box ---- */
+.searchbox {
+  width: 100%;
+}
+
+.searchbox input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  color: var(--primary);
+  background: var(--entry);
+  border: 1px solid var(--border);
+  border-radius: var(--content-radius);
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+.searchbox input:focus {
+  border-color: var(--primary);
+}
+
+.searchResults {
+  list-style: none;
+  padding: 0;
+  margin: 1rem 0 0;
+}
+
+.searchResults li {
+  padding: 0.75rem 1rem;
+  margin-bottom: 0.5rem;
+  background: var(--entry);
+  border: 1px solid var(--border);
+  border-radius: var(--content-radius);
+  transition: border-color 0.2s ease;
+}
+
+.searchResults li:hover {
+  border-color: var(--secondary);
+}
+
+/* ---- Pagination ---- */
+.page-footer {
+  margin-top: 1.5rem;
+}
+
+.pagination {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.pagination a {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: var(--primary);
+  background: var(--entry);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  text-decoration: none;
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.pagination a:hover {
+  background: var(--tertiary);
+  border-color: var(--secondary);
+}
+
+.pagination .next {
+  margin-inline-start: auto;
+}
+
+/* ============================================
+   Right sidebar — TOC (article pages only)
+   ============================================ */
+.toc-right {
+  grid-area: toc;
+  position: sticky;
+  top: var(--top-offset);
+  align-self: start;
+  width: var(--toc-w);
+}
+
+.toc-right .toc-inner {
+  background: var(--entry);
+  border: 1px solid var(--border);
+  border-radius: var(--sidebar-radius);
+  padding: 0.75rem 1rem;
+  max-height: calc(100vh - 10rem);
+  overflow-y: auto;
+}
+
+.toc-right .toc-title {
+  font-size: clamp(0.78rem, 1.4vw, 0.85rem);
+  font-weight: 600;
+  color: var(--primary);
+  margin-bottom: 0.5rem;
+  padding-bottom: 0.4rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.toc-right .toc-inner #TableOfContents ul {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+}
+
+.toc-right .toc-inner #TableOfContents li {
+  margin: 0.1rem 0;
+}
+
+.toc-right .toc-inner #TableOfContents li a {
+  display: block;
+  padding: 0.2rem 0.4rem;
+  font-size: clamp(0.72rem, 1.3vw, 0.8rem);
+  color: var(--secondary);
+  line-height: 1.5;
+  border-radius: 4px;
+  border-left: 3px solid transparent;
+  text-decoration: none;
+  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.toc-right .toc-inner #TableOfContents li a:hover {
+  color: var(--primary);
+  background: var(--tertiary);
+}
+
+.toc-right .toc-inner #TableOfContents li a.active {
+  color: var(--primary);
+  background: var(--tertiary);
+  border-left-color: var(--primary);
+  font-weight: 500;
+}
+
+.toc-right .toc-inner #TableOfContents li ul {
+  padding-left: 0.75rem;
+}
+
+/* ============================================
+   Right sidebar — reusable widgets column
+   ============================================ */
+.right-sidebar {
+  grid-area: toc;
+  position: sticky;
+  top: var(--top-offset);
+  align-self: start;
+  width: var(--toc-w);
+}
+
+.right-sidebar-card {
+  background: var(--entry);
+  border: 1px solid var(--border);
+  border-radius: var(--sidebar-radius);
+  padding: 1rem 1.1rem;
+}
+
+.right-sidebar-title {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: clamp(0.78rem, 1.4vw, 0.85rem);
+  font-weight: 600;
+  color: var(--primary);
+  margin: 0 0 0.75rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.right-sidebar-title svg {
+  flex-shrink: 0;
+}
+
+/* ---- Site runtime widget ---- */
+.site-runtime {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: baseline;
+  justify-content: center;
+  gap: 0.1rem;
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--primary);
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.site-runtime-value {
+  font-variant-numeric: tabular-nums;
+  color: var(--primary);
+}
+
+.site-runtime-unit {
+  color: var(--secondary);
+  font-size: 0.75rem;
+  margin-right: 0.25rem;
+}
+
+.site-runtime-unit:last-child {
+  margin-right: 0;
+}
+
+/* ---- Daily quote widget ---- */
+.daily-quote-card {
+  margin-bottom: 1rem;
+}
+
+.daily-quote-text {
+  position: relative;
+  margin: 0;
+  padding: 0.25rem 0 0.25rem 0;
+  font-size: clamp(0.82rem, 1.45vw, 0.9rem);
+  line-height: 1.75;
+  color: var(--secondary);
+  letter-spacing: 0.01em;
+}
+
+.daily-quote-text::before,
+.daily-quote-text::after {
+  content: none;
+}
+
+.daily-quote {
+  position: relative;
+  padding: 0.4rem 0.75rem;
+  background: var(--tertiary);
+  border-radius: var(--radius);
+}
+
+.daily-quote::before {
+  content: "💬";
+  position: absolute;
+  top: 0.35rem;
+  right: 0.45rem;
+  font-size: 0.75rem;
+  opacity: 0.35;
+  line-height: 1;
+}
+
+.daily-quote-divider {
+  height: 1px;
+  background: var(--border);
+  margin: 0.9rem 0 0.75rem;
+}
+
+/* ---- About site widget ---- */
+.about-site {
+  margin-bottom: 0.9rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.about-site-text {
+  margin: 0;
+  font-size: clamp(0.78rem, 1.35vw, 0.85rem);
+  line-height: 1.7;
+  color: var(--secondary);
+}
+
+/* ---- Time greeting widget ---- */
+.time-greeting {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  padding-bottom: 0.85rem;
+  border-bottom: 1px solid var(--border);
+  font-size: clamp(0.95rem, 1.7vw, 1.05rem);
+  color: var(--primary);
+}
+
+.time-greeting-icon {
+  display: inline-flex;
+  width: 1.25rem;
+  height: 1.25rem;
+  border-radius: 50%;
+  background: var(--tertiary);
+  position: relative;
+  flex-shrink: 0;
+}
+
+.time-greeting-icon::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  opacity: 0.35;
+  transition: background 0.3s ease;
+}
+
+.time-greeting-icon[data-period="morning"]::before {
+  background: radial-gradient(circle at 30% 30%, #f59e0b, transparent 70%);
+}
+
+.time-greeting-icon[data-period="afternoon"]::before {
+  background: radial-gradient(circle at 30% 30%, #3b82f6, transparent 70%);
+}
+
+.time-greeting-icon[data-period="evening"]::before {
+  background: radial-gradient(circle at 30% 30%, #8b5cf6, transparent 70%);
+}
+
+.time-greeting-text {
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  line-height: 1.5;
+}
+
+/* ============================================
+   Tablet: 769–1200px — hide TOC
+   ============================================ */
+@media (max-width: 1200px) {
+  .toc-right,
+  .right-sidebar {
+    display: none;
+  }
+}
+
+/* ============================================
+   Mobile: ≤1024px — single column
+   ============================================ */
+@media (max-width: 1024px) {
+  .page-with-sidebar {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "sidebar"
+      "header"
+      "content";
+    grid-template-rows: auto;
+    gap: 1.5rem;
+  }
+
+  .toc-right,
+  .right-sidebar {
+    display: none;
+  }
+
+  .page-with-sidebar > .page-header {
+    margin-bottom: 0;
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+
+  .content-right .post-content {
+    margin-top: 0;
+  }
+
+  .sidebar-profile {
+    align-self: stretch;
+    position: static;
+  }
+
+  .sidebar-profile-inner {
+    padding: 1rem;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .sidebar-profile-inner img {
+    width: var(--avatar-size-mobile);
+    height: var(--avatar-size-mobile);
+  }
+
+  .sidebar-title {
+    font-size: clamp(0.95rem, 3.5vw, 1.1rem);
+    width: 100%;
+  }
+
+  .sidebar-subtitle {
+    font-size: clamp(0.75rem, 2.5vw, 0.82rem);
+    width: 100%;
+    margin-bottom: 0.75rem;
+  }
+
+  .sidebar-divider {
+    display: none;
+  }
+
+  .sidebar-nav {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .sidebar-button {
+    flex: 1 1 calc(50% - 0.4rem);
+    min-width: 90px;
+    padding: 0.5rem 0.6rem;
+  }
+
+  .sidebar-profile-inner .social-icons {
+    margin: 0.15rem 0 0.25rem;
+  }
+
+  .sidebar-profile-inner .social-icons svg {
+    height: 18px;
+    width: 18px;
+  }
+
+  .sidebar-stats {
+    display: none;
+  }
+}
+
+/* ============================================
+   Tag Detail Page — term.html
+   ============================================ */
+
+/* ---- Tag header badge ---- */
+.tag-header-title {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.tag-header-badge {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.15rem;
+  padding: 0;
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--primary);
+  background: transparent;
+  border-radius: 0;
+  letter-spacing: -0.03em;
+  line-height: 1.2;
+}
+
+.tag-header-hash {
+  color: var(--secondary);
+  font-weight: 400;
+  opacity: 0.5;
+}
+
+.tag-header-name {
+  color: var(--primary);
+}
+
+.tag-header-rss {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.35rem;
+  color: var(--secondary);
+  border-radius: 6px;
+  transition: color 0.2s ease, background 0.2s ease;
+}
+
+.tag-header-rss:hover {
+  color: var(--primary);
+  background: var(--tertiary);
+}
+
+/* Tag header meta row */
+.tag-header-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-top: 0.5rem;
+  font-size: 0.85rem;
+  color: var(--secondary);
+  flex-wrap: wrap;
+}
+
+.tag-header-count,
+.tag-header-time,
+.tag-header-range {
+  font-weight: 500;
+}
+
+.tag-header-sep {
+  opacity: 0.35;
+  font-weight: 300;
+}
+
+.tag-header-desc {
+  margin-top: 0.6rem;
+}
+
+/* ---- Tag page inline search ---- */
+.tag-search-wrap {
+  position: relative;
+  margin-bottom: 1rem;
+}
+
+.tag-search-icon {
+  position: absolute;
+  left: 0.85rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--secondary);
+  pointer-events: none;
+}
+
+.tag-search-input {
+  width: 100%;
+  padding: 0.65rem 0.9rem 0.65rem 2.4rem;
+  font-size: 0.95rem;
+  color: var(--primary);
+  background: var(--theme);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.tag-search-input::placeholder {
+  color: var(--secondary);
+  opacity: 0.7;
+}
+
+.tag-search-input:focus {
+  border-color: var(--secondary);
+  box-shadow: 0 0 0 2px var(--tertiary);
+}
+
+.tag-search-empty {
+  padding: 1.25rem;
+  text-align: center;
+  font-size: 0.9rem;
+  color: var(--secondary);
+  background: var(--tertiary);
+  border: 1px dashed var(--border);
+  border-radius: 10px;
+  margin-bottom: 1rem;
+}
+
+@media (max-width: 1024px) {
+  .tag-search-input {
+    font-size: 1rem;
+    padding: 0.7rem 0.9rem 0.7rem 2.4rem;
+  }
+}
+
+/* ---- Tag entry — tags row in article cards ---- */
+.tag-entry .entry-footer {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.entry-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0;
+  line-height: 1.6;
+}
+
+.entry-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+  margin-top: 0.15rem;
+}
+
+.entry-tag {
+  display: inline-flex;
+  padding: 0.12rem 0.55rem;
+  font-size: 0.72rem;
+  font-weight: 500;
+  color: var(--secondary);
+  background: var(--theme);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  text-decoration: none;
+  line-height: 1.5;
+  transition: color 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+}
+
+.entry-tag:hover {
+  color: var(--primary);
+  background: var(--tertiary);
+  border-color: var(--secondary);
+}
+
+.entry-tag-current {
+  color: var(--theme);
+  background: var(--primary);
+  border-color: var(--primary);
+  font-weight: 600;
+}
+
+.entry-tag-current:hover {
+  opacity: 0.85;
+  color: var(--theme);
+  background: var(--primary);
+  border-color: var(--primary);
+}
+
+/* ---- Tag info sidebar (right column) ---- */
+.tag-info-sidebar {
+  grid-area: toc;
+}
+
+.tag-info-card {
+  padding: 1rem 1.1rem;
+}
+
+.tag-info-title {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: clamp(0.78rem, 1.4vw, 0.85rem);
+  font-weight: 600;
+  color: var(--primary);
+  margin-bottom: 0.75rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.tag-info-title svg {
+  flex-shrink: 0;
+}
+
+/* Stats grid */
+.tag-info-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.tag-info-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0.5rem 0.3rem;
+  background: var(--theme);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  text-align: center;
+}
+
+.tag-info-stat-value {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--primary);
+  line-height: 1.3;
+}
+
+.tag-info-stat-year {
+  font-size: 0.95rem;
+}
+
+.tag-info-stat-label {
+  font-size: 0.7rem;
+  color: var(--secondary);
+  font-weight: 500;
+  margin-top: 0.1rem;
+}
+
+/* Related tags */
+.tag-info-related {
+  margin-bottom: 0.75rem;
+}
+
+.tag-info-related-title {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.5rem;
+}
+
+.tag-info-related-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.tag-info-related-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.3rem 0.5rem;
+  font-size: 0.78rem;
+  color: var(--secondary);
+  text-decoration: none;
+  border-radius: 6px;
+  transition: color 0.2s ease, background 0.2s ease;
+}
+
+.tag-info-related-item:hover {
+  color: var(--primary);
+  background: var(--tertiary);
+}
+
+.tag-info-related-name {
+  font-weight: 500;
+}
+
+.tag-info-related-count {
+  font-size: 0.7rem;
+  color: var(--secondary);
+  opacity: 0.6;
+  font-weight: 400;
+}
+
+/* Back link */
+.tag-info-back {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  padding: 0.4rem 0.5rem;
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: var(--secondary);
+  text-decoration: none;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  transition: color 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+}
+
+.tag-info-back:hover {
+  color: var(--primary);
+  background: var(--tertiary);
+  border-color: var(--secondary);
+}
+
+.tag-info-back svg {
+  flex-shrink: 0;
+}
+
+/* ---- Responsive ---- */
+@media (max-width: 1200px) {
+  .tag-info-sidebar {
+    display: none;
+  }
+}
+
+@media (max-width: 1024px) {
+  .tag-header-badge {
+    font-size: 1rem;
+    padding: 0.25rem 0.85rem;
+  }
+
+  .tag-header-meta {
+    font-size: 0.8rem;
+  }
+
+  .entry-tags {
+    gap: 0.25rem;
+  }
+
+  .entry-tag {
+    font-size: 0.68rem;
+    padding: 0.1rem 0.45rem;
+  }
+}

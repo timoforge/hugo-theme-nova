@@ -1,0 +1,220 @@
+- id: prev_page
+  translation: "上一页"
+
+- id: next_page
+  translation: "下一页"
+
+- id: read_time
+  translation:
+    one: "1 分钟"
+    other: "{{ .Count }} 分钟"
+
+- id: words
+  translation:
+    one: "字"
+    other: "{{ .Count }} 字"
+
+- id: toc
+  translation: "目录"
+
+- id: translations
+  translation: "语言"
+
+- id: home
+  translation: "主页"
+
+- id: edit_post
+  translation: "编辑"
+
+- id: code_copy
+  translation: "复制"
+
+- id: code_copied
+  translation: "已复制！"
+
+- id: search
+  translation: "搜索"
+
+- id: tag_header_posts_format
+  translation:
+    one: "共 1 篇"
+    other: "共 {{ .Count }} 篇"
+
+- id: tag_header_reading_time_format
+  translation:
+    one: "阅读约 1 分钟"
+    other: "阅读约 {{ .Count }} 分钟"
+
+- id: right_sidebar
+  translation: "右侧栏"
+
+- id: greeting_loading
+  translation: "加载中..."
+
+- id: greeting_morning
+  translation: "早上好 ☀️"
+
+- id: greeting_afternoon
+  translation: "下午好 🌤️"
+
+- id: greeting_evening
+  translation: "晚上好 🌙"
+
+- id: about_site_title
+  translation: "站长简介"
+
+- id: about_site_content
+  translation: "技术分享 · 开源探索 · 持续学习"
+
+- id: daily_quote
+  translation: "每日一言"
+
+- id: daily_quote_content
+  translation: "学而不思则罔，思而不学则殆。"
+
+- id: site_runtime
+  translation: "站点运行时间"
+
+- id: days
+  translation: "天"
+
+- id: hours
+  translation: "时"
+
+- id: minutes
+  translation: "分"
+
+- id: seconds
+  translation: "秒"
+
+- id: back_to_home
+  translation: "回到首页"
+
+- id: page_navigation
+  translation: "页面导航"
+
+- id: sidebar_latest
+  translation: "最新文章"
+
+- id: sidebar_posts_count
+  translation: "篇文章"
+
+- id: sidebar_tags_count
+  translation: "个标签"
+
+- id: nav_posts
+  translation: "文章"
+
+- id: nav_archives
+  translation: "归档"
+
+- id: nav_tags
+  translation: "标签"
+
+- id: nav_search
+  translation: "搜索"
+
+- id: home_search
+  translation: "站内搜索"
+
+- id: search_placeholder
+  translation: "搜索文章..."
+
+- id: search_popular_tags
+  translation: "热门标签"
+
+- id: search_filter_tag
+  translation: "筛选: "
+
+- id: search_tips
+  translation: "搜索提示"
+
+- id: search_tip_content
+  translation: "支持标题、描述、标签内容的模糊搜索"
+
+- id: search_tip_realtime
+  translation: "输入即搜索，实时显示结果"
+
+- id: search_tip_keyboard
+  translation: "键盘 ↑↓ 导航，Enter 打开"
+
+- id: search_tip_tags
+  translation: "支持按标签筛选"
+
+- id: recent_posts
+  translation: "最近文章"
+
+- id: view_all_posts
+  translation: "查看全部文章 →"
+
+- id: no_posts_yet
+  translation: "还没有文章。"
+
+- id: write_first_post
+  translation: "写第一篇文章"
+
+- id: tags_search_placeholder
+  translation: "搜索标签..."
+
+- id: tags_all
+  translation: "全部标签"
+
+- id: footer_copyright
+  translation: "© %s 版权所有"
+
+- id: powered_by
+  translation: "基于"
+
+- id: term_search_placeholder
+  translation: "在当前标签中搜索..."
+
+- id: term_search_empty
+  translation: "没有找到匹配的文章"
+
+- id: tag_info_title
+  translation: "标签信息"
+
+- id: tag_info_posts_label
+  translation: "篇文章"
+
+- id: tag_info_minutes_label
+  translation: "分钟阅读"
+
+- id: tag_info_latest_label
+  translation: "最新"
+
+- id: tag_info_related_title
+  translation: "相关标签"
+
+- id: tag_info_all_tags
+  translation: "查看全部标签"
+
+- id: author_label
+  translation: "作者"
+
+- id: published_label
+  translation: "发布于"
+
+- id: read_label
+  translation: "阅读"
+
+- id: read_unit
+  translation: "分钟"
+
+- id: language
+  translation: "语言"
+
+- id: profile_subtitle
+  translation: "三栏 Grid · 双语博客 · 简洁现代"
+
+- id: archives_total
+  translation: "共 %d 篇文章"
+
+- id: archives_timeline
+  translation: "按时间线排列"
+
+- id: archives_year_count
+  translation: "%d 篇"
+
+- id: site_description
+  translation: "Nova - 三栏 Grid 布局双语 Hugo 主题"

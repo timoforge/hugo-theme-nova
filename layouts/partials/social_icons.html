@@ -1,0 +1,15 @@
+<div class="social-icons" {{ with .align }}align="{{ . }}" {{- end }}>
+    {{- range site.Params.socialIcons }}
+    {{- $title := (.title | default .name) | title }}
+    {{- $url := trim .url " " }}
+    {{- if $url }}
+    <a class="social-icon" href="{{ $url | safeURL }}" title="{{ $title }}">
+        {{ partial "svg.html" . }}
+    </a>
+    {{- else }}
+    <span class="social-icon" title="{{ $title }}">
+        {{ partial "svg.html" . }}
+    </span>
+    {{- end }}
+    {{- end }}
+</div>

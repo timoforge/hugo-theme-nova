@@ -1,0 +1,220 @@
+- id: prev_page
+  translation: "Prev"
+
+- id: next_page
+  translation: "Next"
+
+- id: read_time
+  translation:
+    one: "1 min"
+    other: "{{ .Count }} min"
+
+- id: words
+  translation:
+    one: "word"
+    other: "{{ .Count }} words"
+
+- id: toc
+  translation: "Table of Contents"
+
+- id: translations
+  translation: "Translations"
+
+- id: home
+  translation: "Home"
+
+- id: edit_post
+  translation: "Edit"
+
+- id: code_copy
+  translation: "copy"
+
+- id: code_copied
+  translation: "copied!"
+
+- id: search
+  translation: "Search"
+
+- id: tag_header_posts_format
+  translation:
+    one: "1 post"
+    other: "{{ .Count }} posts"
+
+- id: tag_header_reading_time_format
+  translation:
+    one: "~1 min read"
+    other: "~{{ .Count }} min read"
+
+- id: right_sidebar
+  translation: "Right Sidebar"
+
+- id: greeting_loading
+  translation: "Loading..."
+
+- id: greeting_morning
+  translation: "Good Morning ☀️"
+
+- id: greeting_afternoon
+  translation: "Good Afternoon 🌤️"
+
+- id: greeting_evening
+  translation: "Good Evening 🌙"
+
+- id: about_site_title
+  translation: "About the Author"
+
+- id: about_site_content
+  translation: "Tech notes · Open source · Continuous learning"
+
+- id: daily_quote
+  translation: "Daily Quote"
+
+- id: daily_quote_content
+  translation: "Stay hungry, stay foolish."
+
+- id: site_runtime
+  translation: "Site Runtime"
+
+- id: days
+  translation: "d"
+
+- id: hours
+  translation: "h"
+
+- id: minutes
+  translation: "m"
+
+- id: seconds
+  translation: "s"
+
+- id: back_to_home
+  translation: "Back to Home"
+
+- id: page_navigation
+  translation: "Page Navigation"
+
+- id: sidebar_latest
+  translation: "Latest"
+
+- id: sidebar_posts_count
+  translation: "posts"
+
+- id: sidebar_tags_count
+  translation: "tags"
+
+- id: nav_posts
+  translation: "Posts"
+
+- id: nav_archives
+  translation: "Archives"
+
+- id: nav_tags
+  translation: "Tags"
+
+- id: nav_search
+  translation: "Search"
+
+- id: home_search
+  translation: "Search"
+
+- id: search_placeholder
+  translation: "Search posts..."
+
+- id: search_popular_tags
+  translation: "Popular Tags"
+
+- id: search_filter_tag
+  translation: "Filter: "
+
+- id: search_tips
+  translation: "Search Tips"
+
+- id: search_tip_content
+  translation: "Fuzzy search in titles, descriptions, and tags"
+
+- id: search_tip_realtime
+  translation: "Real-time results as you type"
+
+- id: search_tip_keyboard
+  translation: "↑↓ navigate, Enter to open"
+
+- id: search_tip_tags
+  translation: "Filter by tags"
+
+- id: recent_posts
+  translation: "Recent Posts"
+
+- id: view_all_posts
+  translation: "View All Posts →"
+
+- id: no_posts_yet
+  translation: "No posts yet."
+
+- id: write_first_post
+  translation: "Write the first post"
+
+- id: tags_search_placeholder
+  translation: "Search tags..."
+
+- id: tags_all
+  translation: "All Tags"
+
+- id: footer_copyright
+  translation: "© %s All Rights Reserved"
+
+- id: powered_by
+  translation: "Powered by"
+
+- id: term_search_placeholder
+  translation: "Search in this tag..."
+
+- id: term_search_empty
+  translation: "No matching posts found"
+
+- id: tag_info_title
+  translation: "Tag Info"
+
+- id: tag_info_posts_label
+  translation: "posts"
+
+- id: tag_info_minutes_label
+  translation: "min read"
+
+- id: tag_info_latest_label
+  translation: "Latest"
+
+- id: tag_info_related_title
+  translation: "Related Tags"
+
+- id: tag_info_all_tags
+  translation: "View all tags"
+
+- id: author_label
+  translation: "Author"
+
+- id: published_label
+  translation: "Published"
+
+- id: read_label
+  translation: "Read"
+
+- id: read_unit
+  translation: "min"
+
+- id: language
+  translation: "Language"
+
+- id: profile_subtitle
+  translation: "Three-column Grid · Bilingual · Clean & Modern"
+
+- id: archives_total
+  translation: "%d posts"
+
+- id: archives_timeline
+  translation: "Arranged by timeline"
+
+- id: archives_year_count
+  translation: "%d posts"
+
+- id: site_description
+  translation: "Nova - a three-column Grid bilingual Hugo theme"

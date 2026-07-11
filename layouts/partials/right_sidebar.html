@@ -1,0 +1,129 @@
+<aside class="right-sidebar" aria-label="{{ i18n "right_sidebar" }}">
+  <div class="right-sidebar-card">
+    <div class="time-greeting" id="time-greeting">
+      <span class="time-greeting-icon" aria-hidden="true"></span>
+      <span class="time-greeting-text">{{ i18n "greeting_loading" }}</span>
+    </div>
+    <div class="about-site">
+      <h3 class="right-sidebar-title">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="10"></circle>
+          <line x1="12" y1="16" x2="12" y2="12"></line>
+          <line x1="12" y1="8" x2="12.01" y2="8"></line>
+        </svg>
+        {{ i18n "about_site_title" }}
+      </h3>
+      <p class="about-site-text">{{ i18n "about_site_content" }}</p>
+    </div>
+    <h3 class="right-sidebar-title">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
+      </svg>
+      {{ i18n "daily_quote" }}
+    </h3>
+    <div class="daily-quote">
+      <p class="daily-quote-text">
+        {{ i18n "daily_quote_content" }}
+      </p>
+    </div>
+    <div class="daily-quote-divider"></div>
+    <h3 class="right-sidebar-title">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <circle cx="12" cy="12" r="10"></circle>
+        <polyline points="12 6 12 12 16 14"></polyline>
+      </svg>
+      {{ i18n "site_runtime" }}
+    </h3>
+    {{- /* 非默认语言不继承全局 params，须在 languages.toml 的 [lang.params] 显式写 siteStartDate */ -}}
+    {{- $startDate := site.Params.siteStartDate | default "2026-01-01T00:00:00+08:00" -}}
+    <div class="site-runtime" id="site-runtime" data-start="{{ $startDate }}">
+      <span class="site-runtime-value" data-unit="days">0</span><span class="site-runtime-unit">{{ i18n "days" }}</span>
+      <span class="site-runtime-value" data-unit="hours">00</span><span class="site-runtime-unit">{{ i18n "hours" }}</span>
+      <span class="site-runtime-value" data-unit="minutes">00</span><span class="site-runtime-unit">{{ i18n "minutes" }}</span>
+      <span class="site-runtime-value" data-unit="seconds">00</span><span class="site-runtime-unit">{{ i18n "seconds" }}</span>
+    </div>
+  </div>
+</aside>
+
+{{- /* 问候语不依赖 siteStartDate；运行时长在 data-start 为空时由 JS 自行跳过 */ -}}
+<script>
+(function() {
+  var MS_PER_DAY = 86400000;
+  var MS_PER_HOUR = 3600000;
+  var MS_PER_MINUTE = 60000;
+  var MS_PER_SECOND = 1000;
+
+  var GREETINGS = {
+    morning: {{ i18n "greeting_morning" | jsonify | safeJS }},
+    afternoon: {{ i18n "greeting_afternoon" | jsonify | safeJS }},
+    evening: {{ i18n "greeting_evening" | jsonify | safeJS }}
+  };
+
+  function pad(value) {
+    return (value < 10 ? '0' : '') + value;
+  }
+
+  function updateRuntime() {
+    var container = document.getElementById('site-runtime');
+    if (!container) return;
+
+    var startStr = container.getAttribute('data-start');
+    if (!startStr) return;
+
+    var textarea = document.createElement('textarea');
+    textarea.innerHTML = startStr;
+    startStr = textarea.value;
+
+    var start = new Date(startStr);
+    if (isNaN(start.getTime())) return;
+
+    var diff = Date.now() - start.getTime();
+    if (diff < 0) diff = 0;
+
+    var days = Math.floor(diff / MS_PER_DAY);
+    diff -= days * MS_PER_DAY;
+    var hours = Math.floor(diff / MS_PER_HOUR);
+    diff -= hours * MS_PER_HOUR;
+    var minutes = Math.floor(diff / MS_PER_MINUTE);
+    diff -= minutes * MS_PER_MINUTE;
+    var seconds = Math.floor(diff / MS_PER_SECOND);
+
+    var daysEl = container.querySelector('[data-unit="days"]');
+    var hoursEl = container.querySelector('[data-unit="hours"]');
+    var minutesEl = container.querySelector('[data-unit="minutes"]');
+    var secondsEl = container.querySelector('[data-unit="seconds"]');
+
+    if (daysEl) daysEl.textContent = days;
+    if (hoursEl) hoursEl.textContent = pad(hours);
+    if (minutesEl) minutesEl.textContent = pad(minutes);
+    if (secondsEl) secondsEl.textContent = pad(seconds);
+  }
+
+  function updateGreeting() {
+    var greetingEl = document.getElementById('time-greeting');
+    if (!greetingEl) return;
+
+    var hour = new Date().getHours();
+    var textEl = greetingEl.querySelector('.time-greeting-text');
+    var iconEl = greetingEl.querySelector('.time-greeting-icon');
+    if (!textEl) return;
+
+    var period = 'evening';
+    var message = GREETINGS.evening;
+    if (hour >= 5 && hour < 12) {
+      period = 'morning';
+      message = GREETINGS.morning;
+    } else if (hour >= 12 && hour < 18) {
+      period = 'afternoon';
+      message = GREETINGS.afternoon;
+    }
+
+    textEl.textContent = message;
+    if (iconEl) iconEl.dataset.period = period;
+  }
+
+  updateGreeting();
+  updateRuntime();
+  setInterval(updateRuntime, 1000);
+})();
+</script>

@@ -1,0 +1,184 @@
+/* 主页主容器再拓宽 — 自定义宽度 */
+.main:has(.home-split) {
+  max-width: calc(1200px + var(--gap) * 2);
+  min-height: calc(100vh - var(--header-height) - var(--footer-height) - 3rem);
+}
+
+/* 主页左右分栏布局 — 右栏（搜索+最近文章）再拓宽 */
+.home-split {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr;
+  gap: 2.5rem;
+  align-items: start;
+}
+
+.home-left {
+  position: sticky;
+  top: 2rem;
+}
+
+.home-right .recent-posts {
+  margin-top: 0;
+}
+
+/* 最近文章区域 — 加宽 */
+.recent-posts h2 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 0.5rem;
+}
+
+.recent-posts .post-entry {
+  padding: 1.25rem 1.5rem;
+}
+
+.recent-posts .view-all {
+  margin-top: 1rem;
+  text-align: right;
+}
+
+/* 站内搜索框 */
+.home-search {
+  margin-bottom: 1.5rem;
+}
+
+.home-search h2 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 0.5rem;
+}
+
+.search-form {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.search-form input[type="search"] {
+  flex: 1;
+  min-width: 0;
+  padding: 0.75rem 1rem;
+  font-size: 1.05rem;
+  color: var(--primary);
+  background: var(--entry);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  outline: none;
+}
+
+.search-form input[type="search"]:focus {
+  border-color: var(--primary);
+}
+
+.search-form button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 1rem;
+  color: var(--primary);
+  background: var(--entry);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  cursor: pointer;
+}
+
+.search-form button:hover {
+  background: var(--tertiary);
+}
+
+/* 移动端堆叠显示 */
+@media (max-width: 1024px) {
+  .home-split {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .home-left {
+    position: static;
+  }
+}
+
+/* 修复无内容时仍出现滚动条 */
+html {
+  overflow-y: auto;
+}
+.home-left .profile {
+  min-height: calc(100vh - var(--header-height) - var(--footer-height) - 3rem);
+}
+
+/* 主页导航按钮样式 */
+.home-left .nav-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  justify-content: center;
+  margin-top: 0.5rem;
+}
+
+.home-left .nav-buttons .button {
+  background: var(--tertiary);
+  border-radius: var(--radius);
+  padding: 0.45rem 1rem;
+  font-size: 0.9rem;
+  text-decoration: none;
+  color: var(--primary);
+  transition: background 0.2s ease, transform 0.15s ease;
+}
+
+.home-left .nav-buttons .button:hover {
+  background: var(--entry);
+  transform: translateY(-1px);
+}
+
+.home-left .nav-buttons .button-inner {
+  font-weight: 500;
+}
+
+/* 主页自定义按钮与导航按钮间距 */
+.home-left .custom-buttons {
+  margin-top: 0.3rem;
+}
+@media (max-width: 1024px) {
+  .home-left .profile {
+    min-height: auto;
+  }
+}
+/* 压缩页脚整体高度 */
+.footer {
+  padding-top: 0.4rem;
+  padding-bottom: 0.4rem;
+  line-height: 1.5;
+}
+
+/* 页脚版权/致谢 */
+.footer {
+  font-size: 0.9em;
+  opacity: 0.9;
+}
+.footer a {
+  opacity: 1;
+}
+
+/* 顶部导航栏滚动时固定在页面最上方 */
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--theme);
+}
+
+/* 导航栏内容宽度与带侧边栏的主容器对齐 */
+.header-nav {
+  max-width: calc(
+    var(--nav-width) + var(--gap) * 2 + var(--toc-w) * 2 + var(--gap-col) * 2
+  );
+}
+
+/* 返回顶部按钮 — 底部居中，避免与右侧目录栏重叠 */
+.top-link {
+  right: 50%;
+  bottom: 1.5rem;
+  transform: translateX(50%);
+}
